@@ -41,7 +41,7 @@ my_model <- '
 detector <- train_detector(
   model  = my_model,
   R_list = R_list,
-  nobs   = 200
+  nobs   = 30
 )
 
 # Step 4: Repair a non-converging covariance matrix
