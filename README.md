@@ -55,9 +55,22 @@ result <- repair_sem_vcov(
 )
 
 # Inspect results
-result$converged_after
-result$diagnostics
-result$suspects
+cat("\n========== RESULTS ==========\n")
+  cat(sprintf("Converged BEFORE repair: %s\n", result$converged_before))
+  cat(sprintf("Converged AFTER  repair: %s\n", result$converged_after))
+  cat(sprintf("Repair time: %.2f sec\n", t2_done))
+  cat(sprintf("Lambda used: %.4g\n", result$diagnostics$lambda_used))
+  cat(sprintf("Used nearPD fallback: %s\n", result$diagnostics$used_nearPD))
+  cat(sprintf("Delta max: %.4f | Delta mean: %.4f\n",
+              result$diagnostics$delta_max, result$diagnostics$delta_mean))
+  cat(sprintf("Min eigenvalue: obs=%.4f | repaired=%.4f\n",
+              result$diagnostics$min_eig_obs, result$diagnostics$min_eig_rep))
+
+  if (nrow(result$suspects) > 0) {
+    cat("\nTop suspects (SHAP anchors):\n")
+    print(result$suspects[, .(feature, shap_logit, anchor_strength)])
+  }
+}
 ```
 
 ## Reuse across models
