@@ -1,7 +1,7 @@
 # Local Repair of Unhappy Covariances
 R toolkit for repairing non-converging SEM covariance matrices using XGBoost-guided SHAP diagnostics.
 
-When structural equation models fail to converge on observed covariance matrices, this tool identifies the destabilizing correlations and applies minimal, targeted corrections. The pipeline trains a binary classifier on adversarial covariance matrices, uses SHAP values to pinpoint problematic correlation pairs, and repairs the matrix via forward-search with bisection — preserving as much of the original structure as possible.
+When structural equation models fail to converge on observed covariance matrices, this tool identifies the unhappy covariances and applies minimal, targeted corrections. The pipeline trains a binary classifier on adversarial covariance matrices, uses SHAP values to pinpoint problematic covariances, and repairs the matrix via forward-search with bisection — preserving as much of the original structure as possible.
 
 ## How it works
 
@@ -11,7 +11,7 @@ When structural equation models fail to converge on observed covariance matrices
 
 3. **XGBoost detector** — Train a binary classifier on Fisher-z transformed lower-triangle correlations (features) with convergence labels (target). Uses 5-fold CV with early stopping to find the optimal number of boosting rounds (`eta = 0.1`, all other hyperparameters at defaults).
 
-4. **SHAP anchor detection** — For a given non-converging matrix, compute SHAP values to identify which correlation pairs contribute most to predicted non-convergence. These "anchors" are the repair targets.
+4. **SHAP anchor detection** — For a given non-converging matrix, compute SHAP values to identify which correlation pairs contribute most to predicted non-convergence. These "unhappy correlations" are the repair targets.
 
 5. **Forward-search + bisection repair** — Incrementally adjust the suspect correlations toward a theory-informed target matrix, using the smallest step size (lambda) that restores convergence. Falls back to `nearPD` projection if needed.
 
@@ -44,7 +44,7 @@ detector <- train_detector(
   nobs   = 30
 )
 
-# Step 4: Repair a non-converging covariance matrix
+# Step 4: Locally repair a non-converging covariance matrix
 result <- repair_sem_vcov(
   data     = my_data,
   model    = my_model,
