@@ -73,6 +73,24 @@ cat("\n========== RESULTS ==========\n")
 }
 ```
 
+## Generating adversarial VCOVs for a different *p*
+
+The included `R_list.RData` contains 50,000 adversarial covariance matrices for *p* = 6. If your SEM model has a different number of observed variables, generate a new set:
+
+```r
+source("01_adversarial_vcov_generator.R")
+
+sim_res <- run_vcov_sim(
+  n_sims = 50000,
+  p = 10          # set to your number of observed variables
+)
+
+R_list <- sim_res$R_list
+save(R_list, file = "R_list_p10.RData")
+```
+
+This only needs to be done once per dimensionality. The resulting `R_list` can be reused across all SEM models with that same *p*, and does not need to be regenerated unless new pathology types are added to the perturbation scheme.
+
 ## Reuse across models
 
 The adversarial VCOVs only depend on dimensionality (*p*), not on the SEM specification. Generate them once and reuse:
@@ -109,4 +127,4 @@ Leonard Vanbrabant (Ghent University / GGD West-Brabant)
 
 ## License
 
-This project is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html). 
+This project is licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html).
