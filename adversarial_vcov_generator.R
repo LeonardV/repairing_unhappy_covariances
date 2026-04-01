@@ -325,7 +325,7 @@ diagnose_R <- function(R) {
 #   - severity_label  : Severity class per matrix
 #   - pathology_label : Pathology type per matrix
 run_vcov_sim <- function(
-    n_sims = 5000,
+    n_sims = 50000,
     p = 6,
     seed = 42,
     templates = c(
