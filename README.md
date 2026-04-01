@@ -44,11 +44,25 @@ detector <- train_detector(
   nobs   = 30
 )
 
+# Example VCOV with unhappy covariances
+R_unhappy <- matrix(c(
+   1.00000000,  0.48018385,  0.21955303, -0.14214284, -0.10979973, -0.08057802,
+   0.48018385,  1.00000000,  0.02495629, -0.38518846,  0.02506416, -0.24701991,
+   0.21955303,  0.02495629,  1.00000000, -0.21917081, -0.07274165, -0.21157789,
+  -0.14214284, -0.38518846, -0.21917081,  1.00000000,  0.22590371,  0.36078865,
+  -0.10979973,  0.02506416, -0.07274165,  0.22590371,  1.00000000,  0.23567095,
+  -0.08057802, -0.24701991, -0.21157789,  0.36078865,  0.23567095,  1.00000000
+), nrow = 6, byrow = TRUE,
+   dimnames = list(c("V1","V2","V3","V4","V5","V6"),
+                   c("V1","V2","V3","V4","V5","V6")))
+
 # Step 4: Locally repair a non-converging covariance matrix
 result <- repair_sem_vcov(
-  data     = my_data,
-  model    = my_model,
-  detector = detector
+  sample_cov  = R_unhappy,
+  sample_nobs = 30,
+  model       = my_model,
+  detector    = detector,
+  verbose     = TRUE
 )
 
 # Inspect results
