@@ -79,7 +79,7 @@ source("adversarial_vcov_generator.R")
 
 sim_res <- run_vcov_sim(
   n_sims = 50000,
-  p = 10          # set to your number of observed variables
+  p = 10 # set to your number of observed variables
 )
 
 R_list <- sim_res$R_list
