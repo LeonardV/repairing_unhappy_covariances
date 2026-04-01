@@ -20,9 +20,6 @@ When structural equation models fail to converge on observed covariance matrices
 ```r
 # Install dependencies
 install.packages(c("lavaan", "Matrix", "data.table", "xgboost"))
-
-# Source the toolkit
-source("repair_sem_vcov.R")
 ```
 
 ## Quick start
@@ -31,7 +28,7 @@ source("repair_sem_vcov.R")
 source("repair_sem_vcov.R")
 
 # Step 1: Load pre-generated adversarial VCOVs (generated once per p)
-load("R_list.RData")
+load("R_list_p6.RData")
 
 # Step 2: Define your SEM model
 my_model <- '
