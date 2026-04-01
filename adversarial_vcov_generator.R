@@ -3,7 +3,7 @@
 # Author  : Leonard Vanbrabant (Ghent University/GGD West-Brabant)
 # Date    : 2026-03-16
 # Purpose : Generate correlation-matrix templates, inject realistic pathologies,
-#           compute diagnostics, and run large-scale simulation studies.
+#           and compute diagnostics.
 # =============================================================================
 
 
