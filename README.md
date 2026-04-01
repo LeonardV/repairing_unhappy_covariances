@@ -72,7 +72,7 @@ cat("\n========== RESULTS ==========\n")
 
 ## Generating adversarial VCOVs for a different *p*
 
-The included `R_list.RData` contains 50,000 adversarial covariance matrices for *p* = 6. If your SEM model has a different number of observed variables, generate a new set:
+The included `R_list_p6.RData` contains 50,000 adversarial covariance matrices for *p* = 6. If your SEM model has a different number of observed variables, generate a new set:
 
 ```r
 source("01_adversarial_vcov_generator.R")
